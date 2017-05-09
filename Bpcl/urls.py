@@ -20,5 +20,6 @@ from Reminder.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^mail/', sendMail),
+    url(r'^add_details/', add_details),
+    url(r'^show_details/', show_details),
 ]
