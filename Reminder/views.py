@@ -23,7 +23,7 @@ def add_details(request):
 
 		return render(request,"add_details.html")
 
-
+@csrf_exempt
 def show_details(request):
 
 	data = UserData.objects.all()
@@ -44,9 +44,9 @@ def show_details(request):
 
 
 @csrf_exempt
-def sendMail(request):
+def send_mails(request):
 
-	data = method.POST.get(emailArray)
-	print data
 	email = EmailMessage('jhhh', 'hihihi', to=['connectevery1@gmail.com'])
 	email.send()
+
+	return render(request,"mails.html",{})

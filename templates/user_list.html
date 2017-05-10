@@ -118,7 +118,7 @@ document.getElementById("table1");
                 
               };
 
-              var emailArray=[];
+              var emailArray={};
               var j=0;
 
               for (var i = 0; i < response_data.length; i++) {
@@ -127,15 +127,13 @@ document.getElementById("table1");
 
                   emailArray[j]=response_data[i].email;
                   j++;
+                  alert(response_data[i].email);
 
                 };
 
 
               };
-
-
-
-                
+                            
                 
             }
         </script>
@@ -219,7 +217,7 @@ document.getElementById("table1");
 
 
 <div id="divfix">
-  <form method="POST" action="#">
+  <form method="get" action="/mails/">
 
 <center>  <button class="btn" type="submit" name="submit" onclick="exefunction()" >Send mail</button> </center>
 </form>
