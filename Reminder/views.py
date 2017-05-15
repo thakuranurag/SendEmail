@@ -26,19 +26,41 @@ def add_details(request):
 @csrf_exempt
 def show_details(request):
 
-	data = UserData.objects.all()
-	list_array = []
-	for x in data:
-		list_object = {}
-		list_object["name"] = x.name
-		list_object["phone"]=x.phone
-		list_object["email"]=x.email
-		list_object["date"] = str(x.date)
-		list_array.append(list_object)
+	if request.method=='GET':
+		data = UserData.objects.all()
+		list_array = []
+		for x in data:
+			list_object = {}
+			list_object["name"] = x.name
+			list_object["phone"]=x.phone
+			list_object["email"]=x.email
+			list_object["date"] = str(x.date)
+			list_array.append(list_object)
 
-	data = json.dumps(list_array)
-	print data
-	return render(request,"user_list.html",{"list_array" : data})
+		data = json.dumps(list_array)
+
+		return render(request,"user_list.html",{"list_array" : data})
+
+	if request.method=='POST':
+		start_date = request.POST.get("start")
+		deadline = request.POST.get("deadline")
+		print start_date,deadline
+
+		allData = UserData.objects.filter(date__range=[str(start_date),str(deadline)])
+		print allData
+
+		list_array = []
+		for x in allData:
+			list_object = {}
+			list_object["name"] =x.name
+			list_object["phone"]=x.phone
+			list_object["email"]=x.email
+			list_object["date"] = str(x.date)
+			list_array.append(list_object)
+
+		allData = json.dumps(list_array)
+		
+		return render(request,"user_list.html",{"list_array" : allData})
 
 
 

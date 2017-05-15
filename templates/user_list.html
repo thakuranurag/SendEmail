@@ -5,8 +5,9 @@
 <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
 <link type="text/css" rel="stylesheet" href="/static/materialize/css/colour.css"  media="screen,projection"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
 
+<script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
 
@@ -16,9 +17,6 @@
 
 <link rel="stylesheet" href="static/show_expences.css" />
 
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script type="text/javascript">
 
@@ -31,11 +29,9 @@
 
 
 
-$( document ).ready(function() {
+ $(document).ready(function() {
 
-	alert("hello");
-	
-
+    
 
 	  var response_data={{list_array|safe}};
 
@@ -55,53 +51,21 @@ $( document ).ready(function() {
 
 document.getElementById("table1");
 
+}
 
 
-
-}});
+ });
 
 
 </script>
 
 
-<script type="text/javascript">
-
-
-
-/*
-$( document ).ready(function() {
-
-
-
-
-
-	alert("hello");
-	
-
-
-	   var response_data={{list_array|safe}};
-
-
-	   for(var i=0;i<response_data.length;i++){
-
-		var table_row =''
-
-		table_row+='<tr><td>'+response_data[i].name+'</td>'
-		table_row+='<td>'+response_data[i].phone+'</td>'
-		table_row+='<td>'+response_data[i].email+'</td>'
-        table_row+='<td>'+response_data[i].date+'</td></tr>'
-	    $("#table1").append(table_row);
-     
-
-
-document.getElementById("table1");
-
-});
-*/
-</script>
 
 
 <script language="javascript" type="text/javascript">
+            
+
+
             function exefunction(){
 
               var response_data={{list_array|safe}};
@@ -118,21 +82,34 @@ document.getElementById("table1");
                 
               };
 
-              var emailArray={};
-              var j=0;
+              var emails = {emailArray:[]};
 
-              for (var i = 0; i < response_data.length; i++) {
+
+             for(var i=0;i<response_data.length;i++) {
+
                 
                 if (checkarray[i]==-1) {
+                      // emails.emailArray.push({ 
+                      // "name" : item.name,
+                      // "email"  : item.email,
+                      emails.emailArray.push(response_data[i].name),
+                      emails.emailArray.push(response_data[i].email),
 
-                  emailArray[j]=response_data[i].email;
-                  j++;
-                  alert(response_data[i].email);
+
+                      alert(emails.emailArray);                 
+
+
 
                 };
 
 
               };
+
+
+
+              var listEmail = json.parse(emailArray);
+
+
                             
                 
             }
@@ -144,7 +121,7 @@ document.getElementById("table1");
 
 
 </head>
-<form>
+<form method="POST" action="#" >
 
 <div>
 
@@ -156,7 +133,10 @@ document.getElementById("table1");
          <ul class="collection with-header">
 
 
+<input type="date" name="start">
 <input type="date" name="deadline">
+
+
 
 </div>
 </div>
@@ -164,8 +144,9 @@ document.getElementById("table1");
 </div>
 </div>
 </ul>
-        <center>  <button class="btn" type= "submit" name="submit" onclick=showDialouge() >Show Users</button> </center>
+        <center>  <button class="btn" type= "submit" name="submit" onclick="showFilteredData()"  >Show Users</button> </center>
 </form>
+<center>  <button  onclick="showdata()"  >Show All Users</button> </center>
 <!-- BELOW IS THE CODE FOR CARD -->
 
 
@@ -217,18 +198,13 @@ document.getElementById("table1");
 
 
 <div id="divfix">
-  <form method="get" action="/mails/">
+ 
+    <center>  <button onclick="exefunction()" >Send mail</button> </center>
+   
 
-<center>  <button class="btn" type="submit" name="submit" onclick="exefunction()" >Send mail</button> </center>
-</form>
-
+ 
 </div>
-
-
 
 </body>
 
-
-
-
-</html>
+</html>s
