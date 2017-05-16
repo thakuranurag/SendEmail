@@ -68,7 +68,19 @@ def show_details(request):
 @csrf_exempt
 def send_mails(request):
 
-	email = EmailMessage('jhhh', 'hihihi', to=['connectevery1@gmail.com'])
-	email.send()
+
+	mails = request.GET.get("demo")
+
+	print mails
+
+	newData = json.loads(mails)
+
+	
+
+	print newData[0]
+	
+	for x in newData:
+		email = EmailMessage('Hello Bro', 'Anurag here', to=[x])
+		email.send()
 
 	return render(request,"mails.html",{})

@@ -82,7 +82,7 @@ document.getElementById("table1");
                 
               };
 
-              var emails = {emailArray:[]};
+              var emails = [];
 
 
              for(var i=0;i<response_data.length;i++) {
@@ -92,11 +92,10 @@ document.getElementById("table1");
                       // emails.emailArray.push({ 
                       // "name" : item.name,
                       // "email"  : item.email,
-                      emails.emailArray.push(response_data[i].name),
-                      emails.emailArray.push(response_data[i].email),
+                      emails.push(response_data[i].email),
 
 
-                      alert(emails.emailArray);                 
+                      alert(emails);                 
 
 
 
@@ -111,13 +110,13 @@ document.getElementById("table1");
 
                $.ajax({
                   url: "//127.0.0.1:8000/mails/",
-                  type: "POST",
-                  data: JSON.stringify(emails),
+                  type: "GET",
+                  data: {demo: JSON.stringify(emails)},
                   dataType: "json",
-                  async: false,
                   success: function(data){
                   alert(data);
         }
+
     });
 
 
@@ -216,7 +215,7 @@ document.getElementById("table1");
 
 
 
-<form method="GEt" action="/mails/" id="jsonEmail">
+<form method="GET" action="/mails/" id="jsonEmail">
 
 <center>  <button type="submit" name ="submit" onclick="exefunction()" >Send mail</button> </center>
 
