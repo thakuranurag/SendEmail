@@ -106,8 +106,20 @@ document.getElementById("table1");
               };
 
 
+                alert(emails);
+               
 
-              var listEmail = json.parse(emailArray);
+               $.ajax({
+                  url: "//127.0.0.1:8000/mails/",
+                  type: "POST",
+                  data: JSON.stringify(emails),
+                  dataType: "json",
+                  async: false,
+                  success: function(data){
+                  alert(data);
+        }
+    });
+
 
 
                             
@@ -199,12 +211,20 @@ document.getElementById("table1");
 
 <div id="divfix">
  
-    <center>  <button onclick="exefunction()" >Send mail</button> </center>
+    
    
+
+
+
+<form method="GEt" action="/mails/" id="jsonEmail">
+
+<center>  <button type="submit" name ="submit" onclick="exefunction()" >Send mail</button> </center>
+
+</form>
 
  
 </div>
 
 </body>
 
-</html>s
+</html>
